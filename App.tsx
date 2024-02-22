@@ -48,7 +48,7 @@ export default function App() {
     prepare();
   }, []);
 
-  useCallback(async () => {
+  const onLayoutRootView = useCallback(async () => {
     if (appReady && fontLoaded) {
       await SplashScreen.hideAsync();
     }
@@ -66,7 +66,7 @@ export default function App() {
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
         <NavigationContainer>
           {loggedIn ? <LoggedInNav /> : <LoggedOutNav />}
-          <StatusBar style="auto" />
+          <StatusBar style={isDark ? "light" : "dark"} />
         </NavigationContainer>
       </ThemeProvider>
     </ApolloProvider>

@@ -103,15 +103,21 @@ const PhotoComp = ({
 
   return (
     <Container>
-      <Header onPress={() => navigation.navigate("Profile")}>
+      <Header
+        onPress={() =>
+          navigation.navigate("Profile", {id: user.id, username: user.userName})
+        }
+      >
         <UserAvatar resizeMode="contain" source={{uri: user.avatar + ""}} />
         <Username>{user.userName}</Username>
       </Header>
+
       <File
         resizeMode="contain"
         style={{width: width, height: imgHeight}}
         source={{uri: file}}
       />
+
       <ExtraCont>
         <Actions>
           <Action onPress={() => ToggleLike()}>
@@ -129,7 +135,14 @@ const PhotoComp = ({
           <Text>{totalLikes === 1 ? `1 Like` : `${totalLikes} Likes`}</Text>
         </Likes>
         <Caption>
-          <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("Profile", {
+                id: user.id,
+                username: user.userName,
+              })
+            }
+          >
             <Username>{user.userName}</Username>
           </TouchableOpacity>
           <CaptionText>{caption}</CaptionText>

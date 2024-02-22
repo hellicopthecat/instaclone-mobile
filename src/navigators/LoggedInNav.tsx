@@ -1,73 +1,35 @@
-import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import {Ionicons} from "@expo/vector-icons";
-import {View} from "react-native";
-import StackNavMaker from "@/navigators/StackNavMaker";
-type ITabsNav = {
-  Feed: undefined;
-  Search: undefined;
-  camera: undefined;
-  Notifications: undefined;
-  MyProfile: undefined;
+import {createStackNavigator} from "@react-navigation/stack";
+import TabsNav from "./TabsNav";
+import UploadNav from "./UploadNav";
+import UploadForm from "@/screens/UploadForm";
+
+export type ILoggendIn = {
+  Tabs: undefined;
+  Upload: undefined;
+  UploadForm: {file: string};
 };
-const Tabs = createBottomTabNavigator<ITabsNav>();
+const Stack = createStackNavigator<ILoggendIn>();
+
 const LoggedInNav = () => {
   return (
-    <Tabs.Navigator
-      initialRouteName="Feed"
-      screenOptions={{
-        headerShown: false,
-        tabBarShowLabel: false,
-        tabBarStyle: {backgroundColor: "#123456"},
-        tabBarActiveTintColor: "white",
-        tabBarInactiveTintColor: "gray",
-      }}
-    >
-      <Tabs.Screen
-        name="Feed"
-        options={{
-          tabBarIcon: ({color, size}) => (
-            <Ionicons name="home" size={size} color={color} />
-          ),
-        }}
-        children={() => <StackNavMaker stackName="Feed" />}
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Tabs"
+        component={TabsNav}
+        options={{headerShown: false}}
       />
-      <Tabs.Screen
-        name="Search"
-        options={{
-          tabBarIcon: ({color, size}) => (
-            <Ionicons name="search" size={size} color={color} />
-          ),
-        }}
-        children={() => <StackNavMaker stackName="Search" />}
+      <Stack.Screen
+        name="Upload"
+        component={UploadNav}
+        options={{headerShown: false}}
       />
-      <Tabs.Screen
-        name="camera"
-        component={View}
-        options={{
-          tabBarIcon: ({color, size}) => (
-            <Ionicons name="camera-outline" size={size} color={color} />
-          ),
-        }}
+      <Stack.Screen
+        name="UploadForm"
+        component={UploadForm}
+        options={{headerShown: true}}
       />
-      <Tabs.Screen
-        name="Notifications"
-        options={{
-          tabBarIcon: ({color, size}) => (
-            <Ionicons name="notifications" size={size} color={color} />
-          ),
-        }}
-        children={() => <StackNavMaker stackName="Notifications" />}
-      />
-      <Tabs.Screen
-        name="MyProfile"
-        options={{
-          tabBarIcon: ({color, size}) => (
-            <Ionicons name="person" size={size} color={color} />
-          ),
-        }}
-        children={() => <StackNavMaker stackName="MyProfile" />}
-      />
-    </Tabs.Navigator>
+    </Stack.Navigator>
   );
 };
+
 export default LoggedInNav;

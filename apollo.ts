@@ -21,8 +21,9 @@ export const loggedOut = async () => {
   userToken("");
 };
 
+// uri: "http://localhost:4000/graphql",
 const httpLink = createHttpLink({
-  uri: "http://localhost:4000/graphql",
+  uri: "https://1cd8-58-227-141-22.ngrok-free.app/graphql",
 });
 
 export const cache = new InMemoryCache({

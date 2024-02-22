@@ -1,8 +1,7 @@
-import PhotoComp from "@/components/Photo";
 import Feed from "@/screens/Feed";
 import MyProfile from "@/screens/MyProfile";
 import Notifications from "@/screens/Notifications";
-
+import PhotoScreen from "@/screens/PhotoScreen";
 import Profile from "@/screens/Profile";
 import Search from "@/screens/Search";
 import WhoLikes from "@/screens/WhoLikes";
@@ -13,8 +12,8 @@ export type StackNavMakerType = {
   StackSearch: undefined;
   StackNotifications: undefined;
   StackMyProfile: undefined;
-  Profile: {id: number; username: string};
-  Photo: undefined;
+  Profile?: {id: number; username: string};
+  PhotoScreen: {photoId: number};
   WhoLikes: {photoId: number};
 };
 type StackNameDefs = {
@@ -24,7 +23,10 @@ const Stack = createStackNavigator<StackNavMakerType>();
 const StackNavMaker: React.FC<StackNameDefs> = ({stackName}) => {
   return (
     <Stack.Navigator
-      screenOptions={{headerMode: "screen", headerBackTitle: ""}}
+      screenOptions={{
+        headerMode: "screen",
+        headerBackTitle: "",
+      }}
     >
       {stackName === "Feed" ? (
         <Stack.Screen
@@ -50,7 +52,7 @@ const StackNavMaker: React.FC<StackNameDefs> = ({stackName}) => {
         <Stack.Screen name="StackMyProfile" component={MyProfile} />
       ) : null}
       <Stack.Screen name="Profile" component={Profile} />
-      {/* <Stack.Screen name="Photo" component={PhotoComp} /> */}
+      <Stack.Screen name="PhotoScreen" component={PhotoScreen} />
       <Stack.Screen name="WhoLikes" component={WhoLikes} />
     </Stack.Navigator>
   );

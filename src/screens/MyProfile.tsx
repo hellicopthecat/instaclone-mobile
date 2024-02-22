@@ -1,4 +1,3 @@
-import {Query} from "@/__generated__/graphql";
 import useMe from "@/hooks/useMe";
 import {StackNavMakerType} from "@/navigators/StackNavMaker";
 import {RouteProp} from "@react-navigation/native";
@@ -16,7 +15,7 @@ const MyProfile: React.FC<IMyProfile> = ({navigation, route}) => {
     if (data?.seeMyProfile) {
       navigation.setOptions({title: data.seeMyProfile.userName});
     }
-  }, []);
+  }, [data]);
   return (
     <View>
       <Text>this is MyProfile</Text>
